@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Möbel mieten – Demo-Konzept für Möbel Zürich</title>
+<style>
+:root{--bg:#f4f0e6;--sf:#fffdf8;--sf2:#ebe5d6;--ink:#262a24;--mut:#666b60;--ln:#d9d2c1;--ol:#5b6446;--oli:#fffdf8;--ok:#25704a;--okb:#e2efe6;--bad:#a63f29;--badb:#f8e5e1;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171a15;--sf:#20241d;--sf2:#2c3128;--ink:#efece2;--mut:#aaaf9f;--ln:#3b4135;--ol:#a9b585;--oli:#171a15;--ok:#7fd1a0;--okb:#1f3a2a;--bad:#f1a08c;--badb:#44251e;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#171a15;--sf:#20241d;--sf2:#2c3128;--ink:#efece2;--mut:#aaaf9f;--ln:#3b4135;--ol:#a9b585;--oli:#171a15;--ok:#7fd1a0;--okb:#1f3a2a;--bad:#f1a08c;--badb:#44251e;color-scheme:dark}
+html{background:var(--bg);scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Georgia,"Times New Roman",serif}
+h1,h2,h3,.brand{font-weight:700;letter-spacing:-.01em;margin:0}
+.sans,.pill,.note,.lead,.steps,.cmp,.card,.panel,footer,button,#bar{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+.w{max-width:1120px;margin:0 auto;padding:0 20px}
+header{background:var(--sf);border-bottom:1px solid var(--ln)}
+header .w{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px}
+.brand{font-size:19px;letter-spacing:.05em}
+.pill{font-size:13px;border:1px solid var(--ln);border-radius:99px;padding:3px 10px;color:var(--mut)}
+.note{background:var(--ol);color:var(--oli);font-size:13px;padding:9px 20px;text-align:center}
+h1{font-size:clamp(30px,4.6vw,46px);line-height:1.1;margin:30px 0 10px;max-width:20ch}
+.lead{color:var(--mut);max-width:62ch;margin:0 0 16px}
+.steps{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px;padding:0;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;background:var(--sf2);border-radius:6px;padding:6px 12px;font-size:14px}
+.steps li:before{content:counter(s) ". ";font-weight:700;color:var(--ol)}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 30px}
+.cmp div{border:1px solid var(--ln);border-radius:8px;padding:14px;background:var(--sf);font-size:14px}
+.cmp .new{border-color:var(--ol);box-shadow:inset 4px 0 0 var(--ol)}
+.cmp p{margin:4px 0 0;color:var(--mut)}
+.main{display:grid;grid-template-columns:1fr 410px;gap:28px;align-items:start;padding-bottom:48px}
+@media(max-width:880px){.main{grid-template-columns:1fr}.panel{position:static!important}.cmp{grid-template-columns:1fr}body{padding-bottom:84px}}
+h2{font-size:23px;margin-bottom:12px}
+#grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:8px;padding:12px;display:flex;flex-direction:column;gap:4px}
+.card.on{border-color:var(--ol);box-shadow:0 0 0 2px var(--ol)}
+.ic{height:130px;background:var(--sf2);border-radius:6px;display:grid;place-items:center;position:relative}
+.ic svg{width:92px;height:92px}
+.ic small{position:absolute;top:6px;left:6px;font-size:12px;background:var(--sf);border-radius:4px;padding:1px 6px;color:var(--mut)}
+.card h3{font-size:17px;margin:8px 0 0;line-height:1.25}
+.m{color:var(--mut);font-size:13px;margin:0}
+.pr{font-weight:700;margin:2px 0 4px;font-size:16px}
+.bd{font-size:13px;padding:2px 9px;border-radius:99px;align-self:flex-start}
+.bd.ok{color:var(--ok);background:var(--okb)}
+.bd.no{color:var(--bad);background:var(--badb)}
+button{font-size:14px;cursor:pointer;border-radius:6px;padding:10px 14px;border:1px solid var(--ink);background:transparent;color:var(--ink);margin-top:8px}
+button:disabled{opacity:.45;cursor:not-allowed}
+.card.on button{background:var(--ink);color:var(--bg)}
+.go{background:var(--ol)!important;color:var(--oli)!important;border-color:var(--ol)!important;width:100%;font-weight:700}
+.ghost{width:100%}
+:focus-visible{outline:3px solid var(--ol);outline-offset:2px}
+.panel{position:sticky;top:calc(16px + env(safe-area-inset-top,0px));background:var(--sf);border:1px solid var(--ln);border-top:4px solid var(--ol);border-radius:8px;padding:20px}
+label{display:block;font-size:13px;color:var(--mut);margin:12px 0 4px}
+input:not([type=checkbox]),select{width:100%;box-sizing:border-box;font:inherit;font-size:15px;padding:10px;border:1px solid var(--ln);border-radius:6px;background:var(--bg);color:var(--ink)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+ul.s{list-style:none;padding:0;margin:8px 0}
+ul.s li{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--ln);font-size:14px}
+ul.s li.t{font-weight:700;border:0;font-size:16px}
+.r{color:var(--bad)}
+label.chk{display:flex;gap:8px;align-items:flex-start;color:var(--ink);font-size:13px;margin-top:16px}
+details{font-size:13px;color:var(--mut);margin:6px 0}
+summary{cursor:pointer}
+.msg{min-height:20px;font-size:14px;margin:8px 0 0}
+.mail{background:var(--sf2);border-radius:6px;padding:12px;font-size:13px;white-space:pre-line;margin-bottom:8px}
+#bar{display:none}
+@media(max-width:880px){#bar.on{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:5;justify-content:space-between;align-items:center;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:var(--sf);border-top:1px solid var(--ln);font-size:14px}#bar .go{width:auto;margin:0}}
+footer{color:var(--mut);font-size:13px;padding:0 20px 32px;text-align:center}
+</style>
+</head>
+<body>
+<header><div class="w"><span class="brand">MÖBEL ZÜRICH · MIETEN</span><span class="pill">Demo-Konzept</span></div></header>
+<div class="note">Demo-Konzept, nicht offiziell von Möbel Zürich. Es wird nichts gesendet. Verfügbarkeit und belegte Tage sind erfunden. Namen, Preise und Tarife stammen von der öffentlichen Website. Fotos folgen mit Freigabe.</div>
+<div class="w">
+<h1>Möbel mieten: online anfragen statt PDF ausfüllen</h1>
+<p class="lead">Möbel und Zeitraum wählen, den Preis sofort sehen und eine vollständige Anfrage senden. Möbel Zürich prüft die Verfügbarkeit und bestätigt per E-Mail.</p>
+<ol class="steps"><li>Möbel wählen</li><li>Zeitraum und Übergabe festlegen</li><li>Anfrage senden</li></ol>
+<div class="cmp"><div><b>Heute</b><p>PDF herunterladen, ausfüllen, per E-Mail senden, auf die Prüfung warten, den Termin abstimmen.</p></div><div class="new"><b>Mit Online-Anfrage</b><p>Möbel und Daten wählen, Preis sofort sehen, eine vollständige Anfrage senden. Die Prüfung bleibt bei Möbel Zürich.</p></div></div>
+<div class="main">
+<section><h2>Möbel wählen</h2><div id="grid"></div></section>
+<aside class="panel" id="p">
+<form id="f">
+<h2>Deine Anfrage</h2>
+<label for="use">Wofür brauchst du die Möbel?</label>
+<select id="use"><option value="foto">Foto oder Film (Preisliste veröffentlicht)</option><option value="event">Event oder Gastro (Preis auf Anfrage)</option></select>
+<div class="two"><div><label for="from">Von</label><input type="date" id="from" required></div><div><label for="to">Bis</label><input type="date" id="to" required></div></div>
+<p class="m" id="hint"></p>
+<details><summary>Tarifstufen</summary><p>1 bis 6 Tage: 25 %. Bis 4 Wochen: 35 %. Bis 2 Monate: 45 %. 3 bis 6 Monate: 55 % des Neupreises, plus CHF 20 Bearbeitung pro Artikel. Stufen vereinfacht.</p></details>
+<p class="m">Tipp: Wähle einen Zeitraum in 5 bis 10 Tagen, dann siehst du die Verfügbarkeitsprüfung.</p>
+<ul class="s" id="sum"></ul>
+<label for="mode">Übergabe</label>
+<select id="mode"><option value="pick">Selbstabholung, Feldstrasse 24</option><option value="del">Lieferung</option></select>
+<div id="dl" hidden>
+<label for="reg">Region</label>
+<select id="reg"><option>Stadt Zürich</option><option>Kanton Zürich</option><option>Zug</option><option>Luzern</option><option>Schaffhausen</option><option>Aargau</option><option>Basel-Stadt</option><option>Bern</option></select>
+<label for="fl">Etage (0 = Erdgeschoss)</label><input type="number" id="fl" min="0" max="12" value="0">
+<label class="chk"><input type="checkbox" id="sec"><span>Zweite Person für grosse Möbel</span></label>
+</div>
+<label for="slot">Zeitfenster für Abholung und Rückgabe</label>
+<select id="slot"><option>Samstag, 11 bis 16 Uhr</option><option>Nach Vereinbarung</option></select>
+<label for="nm">Name oder Firma</label><input id="nm" required autocomplete="name">
+<label for="em">E-Mail</label><input id="em" type="email" required autocomplete="email">
+<label for="tl">Telefon (optional)</label><input id="tl" type="tel" autocomplete="tel">
+<label class="chk"><input type="checkbox" id="ag" required><span>Ich weiss: Das ist eine Anfrage, noch keine Buchung. Der Zustand der Möbel wird bei der Abholung geprüft, und der Mietvertrag wird dort unterschrieben.</span></label>
+<button class="go" type="submit">Anfrage erstellen</button>
+<p class="msg" id="msg" role="status" aria-live="polite"></p>
+</form>
+<div id="done" hidden></div>
+</aside>
+</div>
+</div>
+<div id="bar"><span id="bt"></span><button class="go" type="button" id="bgo">Anfrage ansehen</button></div>
+<footer>Preise nach der veröffentlichten Preisliste für Foto und Film (Tarifstufen vereinfacht) und der Lieferseite. Alle Beträge sind eine unverbindliche Schätzung. Stücke mit „Beispielpreis“ sind Platzhalter.</footer>
+<script>
+const $=s=>document.querySelector(s),B=(t=>Date.UTC(t.getFullYear(),t.getMonth(),t.getDate()))(new Date());
+const D=n=>new Date(B+n*864e5).toISOString().slice(0,10),fd=s=>new Date(s+'T00:00:00Z').toLocaleDateString('de-CH',{timeZone:'UTC'});
+const chf=n=>'CHF '+n.toLocaleString('de-CH');
+const ch=c=>'<svg viewBox="0 0 80 80" aria-hidden="true"><rect x="22" y="8" width="36" height="34" rx="4" fill="'+c+'"/><rect x="18" y="42" width="44" height="9" rx="2" fill="'+c+'" opacity=".85"/><path d="M22 51l-4 22M58 51l4 22M30 51l-2 22M50 51l2 22" stroke="var(--ink)" stroke-width="3" stroke-linecap="round"/></svg>';
+const rt=c=>'<svg viewBox="0 0 80 80" aria-hidden="true"><rect x="8" y="24" width="64" height="9" rx="2" fill="'+c+'"/><path d="M16 33v38M64 33v38" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/></svg>';
+const tb=c=>'<svg viewBox="0 0 80 80" aria-hidden="true"><ellipse cx="40" cy="26" rx="30" ry="9" fill="'+c+'"/><path d="M40 35v36M26 72h28" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/></svg>';
+const I=[{n:'Beizenstuhl Lotus',p:210,i:ch('#a9774f'),b:[]},{n:'4er Set Sidechairs Eames',p:600,i:ch('#8f979e'),b:[[20,27]]},{n:'Bigla Gartentisch Gelb, 120 × 70 cm',p:750,i:rt('#e2b93b'),b:[[4,11]]},{n:'Bigla Stuhl mit roter Patina',p:190,i:ch('#b5523b'),b:[],x:1},{n:'Bistrotisch Linoleum Orange',p:470,i:tb('#d9822b'),b:[],x:1},{n:'Serie 7 Stuhl, blau',p:150,i:ch('#3f6fa8'),b:[[9,13]]}];
+const R={'Stadt Zürich':60,'Kanton Zürich':120,'Zug':160,'Luzern':160,'Schaffhausen':160,'Aargau':200,'Basel-Stadt':260,'Bern':310};
+const sel=new Set([0]);
+const days=()=>{const a=$('#from').value,b=$('#to').value;return a&&b&&b>=a?Math.round((Date.parse(b)-Date.parse(a))/864e5)+1:0};
+const pct=d=>d<=6?.25:d<=28?.35:d<=61?.45:d<=183?.55:0;
+const rent=(i,d)=>Math.round(i.p*pct(d))+20;
+const ev=()=>$('#use').value=='event';
+const clash=i=>{const a=$('#from').value,b=$('#to').value;return !!(a&&b)&&i.b.some(([x,y])=>a<=D(y)&&b>=D(x))};
+const deliv=()=>{if($('#mode').value=='pick')return 0;const f=Math.max(0,+$('#fl').value||0);return R[$('#reg').value]+10*f+($('#sec').checked?60+10*f:0)};
+const amt=(i,d)=>ev()?'Preis auf Anfrage':!d?'–':pct(d)?chf(rent(i,d)):'Preis auf Anfrage';
+const copy=async t=>{try{await navigator.clipboard.writeText(t);return 1}catch(e){try{const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();const r=document.execCommand('copy');a.remove();return r}catch(e2){return 0}}};
+function draw(){
+const d=days();
+$('#dl').hidden=$('#mode').value!='del';
+$('#hint').textContent=!d?'Bitte wähle einen gültigen Zeitraum.':d+(d==1?' Tag':' Tage')+(ev()?': Event-Preise werden individuell offeriert.':pct(d)?': '+pct(d)*100+' % vom Neupreis plus CHF 20 Bearbeitung pro Artikel.':': Preis auf Anfrage.');
+$('#grid').innerHTML=I.map((i,x)=>{const c=clash(i),on=sel.has(x);return '<article class="card'+(on?' on':'')+'"><div class="ic">'+i.i+(i.x?'<small>Beispielpreis</small>':'')+'</div><h3>'+i.n+'</h3><p class="m">Neupreis '+chf(i.p)+'</p><p class="pr">'+amt(i,d)+'</p><span class="bd '+(c?'no':'ok')+'">'+(c?'Im Zeitraum belegt':'Verfügbar')+'</span><button type="button" data-i="'+x+'"'+(c&&!on?' disabled':'')+'>'+(on?'Entfernen':'Hinzufügen')+'</button></article>'}).join('');
+let tot=0,h='',open=ev()||!d;
+sel.forEach(x=>{const i=I[x];if(!ev()&&d&&pct(d))tot+=rent(i,d);else open=true;h+='<li><span>'+i.n+(clash(i)?' <b class="r">belegt</b>':'')+'</span><span>'+amt(i,d)+'</span></li>'});
+const v=deliv();
+if(!sel.size)h='<li class="m">Noch keine Möbel gewählt.</li>';
+else h+='<li><span>'+($('#mode').value=='del'?'Lieferung, '+$('#reg').value:'Selbstabholung')+'</span><span>'+chf(v)+'</span></li><li class="t"><span>Geschätzt'+(open?' (ohne Miete)':'')+'</span><span>'+chf(tot+v)+'</span></li>';
+$('#sum').innerHTML=h;
+$('#bt').textContent=sel.size+(sel.size==1?' Möbel':' Möbel')+' · '+chf(tot+v);
+$('#bar').classList.toggle('on',!!sel.size&&!$('#f').hidden)}
+$('#from').value=D(14);$('#to').value=D(17);$('#from').min=$('#to').min=D(0);
+$('#grid').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const x=+b.dataset.i;sel.has(x)?sel.delete(x):sel.add(x);draw()});
+$('#bgo').onclick=()=>$('#p').scrollIntoView({behavior:'smooth'});
+$('#f').addEventListener('input',draw);$('#f').addEventListener('change',draw);
+$('#f').addEventListener('submit',e=>{e.preventDefault();const m=$('#msg'),d=days();
+const bad=!sel.size?'Wähle mindestens ein Möbelstück.':!d?'Wähle einen gültigen Zeitraum.':[...sel].some(x=>clash(I[x]))?'Mindestens ein Stück ist im Zeitraum belegt. Entferne es oder ändere den Zeitraum.':'';
+if(bad){m.textContent=bad;m.className='msg r';return}
+const ref='MZ-DEMO-'+Math.random().toString(36).slice(2,6).toUpperCase(),nm=$('#nm').value.trim(),pick=$('#mode').value=='pick';
+const how=pick?'Abholung im Lager Feldstrasse 24, 8004 Zürich ('+$('#slot').value+')':'Lieferung nach '+$('#reg').value+', Etage '+(+$('#fl').value||0)+($('#sec').checked?', 2 Personen':'');
+let tot=0;const L=[...sel].map(x=>{const i=I[x];if(!ev()&&pct(d))tot+=rent(i,d);return '- '+i.n+': '+amt(i,d)}).join('\n');
+const v=deliv(),open=ev()||!pct(d);
+const txt='Betreff: Mietanfrage '+ref+' von '+nm+'\n\nKunde: '+nm+'\nE-Mail: '+$('#em').value+'\nTelefon: '+($('#tl').value||'nicht angegeben')+'\nVerwendung: '+(ev()?'Event oder Gastro':'Foto oder Film')+'\nZeitraum: '+fd($('#from').value)+' bis '+fd($('#to').value)+' ('+d+(d==1?' Tag':' Tage')+')\n\nMöbel:\n'+L+'\n\nÜbergabe: '+how+'\nGeschätzt: '+chf(tot+v)+(open?' (ohne Miete, Preis auf Anfrage)':'')+'\n\nBitte Verfügbarkeit prüfen und per E-Mail bestätigen.';
+$('#f').hidden=true;$('#bar').classList.remove('on');const o=$('#done');o.hidden=false;
+o.innerHTML='<h2></h2><p>Referenz <b>'+ref+'</b>. Möbel Zürich prüft die Verfügbarkeit und bestätigt per E-Mail. Erst die Bestätigung macht die Reservation verbindlich. In dieser Demo wird nichts gesendet.</p><p class="m">So kommt die Anfrage bei Möbel Zürich an:</p><div class="mail" id="mb"></div><button class="go" type="button" id="cp">Anfrage-Text kopieren</button><button type="button" class="ghost" id="again">Neue Anfrage</button>';
+o.querySelector('h2').textContent='Danke, '+nm+'. Deine Anfrage ist bereit.';$('#mb').textContent=txt;
+$('#cp').onclick=async()=>{$('#cp').textContent=(await copy(txt))?'Kopiert':'Kopieren nicht möglich. Bitte Text markieren.'};
+$('#again').onclick=()=>{o.hidden=true;$('#f').hidden=false;m.textContent='';draw();$('#p').scrollIntoView()}});
+draw();
+</script>
+</body>
+</html>
